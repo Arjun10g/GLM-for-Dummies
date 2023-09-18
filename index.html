@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Tutorial</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script>
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true
+            },
+            "HTML-CSS": { scale: 90 },
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" integrity="sha512-AMl4wfwAmDM1lsQvVBBRHYENn1FR8cfOTpt8QVbb/P55mYOdahHD4LmHM1W55pNe3j/3od8ELzPf/8eNkkjISQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Observer.min.js" integrity="sha512-7xTD1meeGGoAzwZKA0Z8YelV3qAvRltuwACWXpnxtneF7VAMztOTAi3t4laVSaE4Znq4LMPeGUIYWEvKEk5r3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" integrity="sha512-S6SXKUZ11xkCoD/UuhdXG4B4iiCXng+xW2KCx0lgfQqmdqtjqGgm4WChdYIhO1F/CmH21vnkSUvPEgXNgDwkjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="intro">
+        <h1>GLMs for dummies</h1>
+        <h1>By Arjun</h1>
+    </div>
+
+    <div class="math">
+        <h1>Generalized Linear Models</h1>
+        <p>There are a lot of common statistical methods, you are already familar with - <b>Regression</b>, <b>Anova</b>, and maybe even <b>Ancova</b>. Regression allows researchers to determine if and how
+          variables are related. ANOVA allows researchers to determine if the mean scores
+          of different groups or conditions differ. Analysis of covariance (ANCOVA), a
+          combination of regression and ANOVA, allows researchers to determine if the
+          group or condition mean scores differ after the influence of another variable
+          (or variables) on these scores has been equated across groups. </p>
+        <p>Soon you'll notice that the matrix equations for all these models share a certain pattern, a pattern that is expected from all modelling strategies that fall within the purview of GLM (generalized linear models).</p>
+        <p>Tukey, in 1977 came up with the GLM conception when he described data as the following -</p>
+        <p>\[Data = Model + Residual\]</p>
+        <p>If you believe you've already seen similar equations, you are correct. The model is a representation of our understanding or hypotheses
+          about the data, while the error explicitly acknowledges that there are other
+          influences on the data. When a full model is specified, the error is assumed to
+          reflect all influences on the dependent variable scores not controlled in the
+          experiment.</p>
+          <h1>Breaking it down further</h1>
+         <p>The <b>G</b> in GLM represents the term "general" in GLM and simply refers to the ability to accommodate distinctions
+          on quantitative variables representing continuous measures (as in regression
+          analysis) and categorical distinctions representing groups or experimental conditions
+          (as in ANOVA).</p>
+          <p>The <b>L</b> is honestly simply there to attempt to confuse you a little because it stands for linearity. The term "linear" in GLM often is misunderstood to mean that the
+            relation between any data and any predictor variable must be described by a straight
+            line. Although GLMs can describe straight-line relationships, they are capable of
+            much more. Through the use of transformations and polynomials, GLMs can describe
+            many complex curvilinear relations between the data and the predictor variables. </p>
+           <p>The <b>M</b> simply stands for modelling, while there is not much insight gained from expanding on the modelling term. It is important to know that GLM can be succintly described as 
+            a family of modelling approaches that follow distinct probability distributions. For example, the residuals for the Linear regression model follow a different distribution to the residuals of logistic regression or poisson regression. </p>
+    </div>
+
+    <div class="content">
+        <div class="text">
+            <h2>Simple Extensions of the GLM</h2>
+            <p> GLMs provide a framework for modeling various types of data, including continuous, binary, count, and categorical data, by allowing for different link functions (Type of relationship) and error distributions. The choice of link function and error distribution in GLMs allows for flexibility in modeling a wide range of data types and relationships.</p>
+            <h2>ANOVA</h2>
+            <p>ANOVA is another special case of GLM that is used to analyze the differences in means among two or more groups or treatments.</p>
+            <ol>
+              <li><b>Dependent Variable</b> = Numeric</li>
+              <li><b>Predictors</b> = Categorical</li>
+            </ol>
+            <p>ANOVA focuses on categorical independent variables, often referred to as factors, and assesses whether there are statistically significant differences in the means of the dependent variable across these groups.</p>
+            <p>In the context of GLM, ANOVA can be seen as a specialized model where the link function is the identity function (Used for continuous data, where the linear combination is directly related to the mean of the response variable (e.g., linear regression)), and the error distribution is assumed to be normal.</p>
+            <h2>Linear Regression</h2>
+            <p>Linear regression is a special case of GLM where the dependent variable (response) is continuous, and the goal is to model the relationship between the response and one or more predictor variables.</p>
+            <ol>
+              <li><b>Dependent Variable</b> = Numeric</li>
+              <li><b>Predictors</b> = Categorical or Numeric</li>
+            </ol>
+            <p>In linear regression, the model assumes that the conditional mean of the response variable is a linear combination of the predictor variables. </p>
+            <p>The linear regression model is a special case of GLM where the link function is also the identity function, and the error distribution is assumed to be normal (Gaussian).</p>
+            <p>\[Y = \beta_{0} + X_{i}\beta_{1} + \epsilon \]</p>
+            <p>Here, the Y variable is the outcome variable, X is the predictor ,\(\beta_{0}\) is the intercept, \(\beta_{1}\) is the slope, and \(\epsilon\) is the error. </p>
+              
+        </div>
+        <div class="images">
+            <img src="https://www.jmp.com/en_sg/statistics-knowledge-portal/what-is-regression/_jcr_content/par/styledcontainer_2069/par/lightbox_e925/lightboxImage.img.png/1548351202562.png" alt="" class="img">
+            <img src="https://www.statisticsfromatoz.com/uploads/7/3/2/1/73216723/thumbnail-compare-and-contrast-table-copy_orig.jpeg" alt="" class="img">
+            <p><b>Note:</b> you can always fit an ANOVA model within the linear model framework if you input a categorical variable.</p>
+        </div>
+    </div>
+
+    <button class = 'play'>Play Time</button>
+
+    <div class="frame inactive">
+        <iframe src="https://claustecter.shinyapps.io/appy/" frameborder="0"></iframe>
+    </div>
+
+    <div class="math">
+      <h1>Non-Linear extensions of GLM</h1>
+      <p>So far, we've looked at the simplest extensions for GLM where the link function is an identity function and the error distribution is normal. So let's talk about what these link functions are all about?</p>
+      <p>A link function is a mathematical function that relates the expected value of the response variable (the mean) to the linear combination of predictors (also known as the linear predictor). For example, in linear models the typical link function is \(X\beta\).</p>
+      <p> GLMs extend this idea by allowing for a broader range of data types, such as binary (yes/no) data or count data, which typically do not have a linear relationship. Hence, we start with a linear combination of predictors, but we use a link function to model the relationship between this linear combination and the expected value of the response.</p>
+      <h2>Binomial Distribution</h2>
+      <p>The binomial distribution is commonly used to model the number of successes (often denoted as "k") in a fixed number of independent Bernoulli trials, where each trial has two possible outcomes: success or failure. Simply put, we flip a coin and try to model the probability of a heads or we might try to model the probability that an individual will recover when given a certain dose of medicine.</p>
+      <img src="plot1.jpeg" alt="">
+      <p>The above graph examines the binomial distribution of obtaining a head in 10 tosses (500 replications). This binomial distribution actually resembles a normal distribution when the probability of obtaining a success is similar to the probability of a failure. The below graph examines the same distribution but the probability of a heads is now 0.15. Hence why, you can see a strong positive skew. </p>
+      <img src="plot2.jpeg" alt="">
+      <p><b>It is clear that the binomial distribution does not follow a normal distribution unless the probability of success is equal to the probability of failure. </b></p>
+      <p>So, what link function would we end up using if the outcome variable is based off a dichotmous variable? </p>
+      <p>The answer is a little tricker than one would assume, let's take a look at the relationship between a dichotomous outcome variable and a continous predictor. We use a <b>logistic regression model</b> to predict a dichotmous outcome variable based off a continous variable. For example, the probability of not having cancer given the amount of stress can be written as -</p>
+      <p>\[Pr(Cancer = No|Stress)\]</p>
+      <p>Here, the probability of not having cancer is the outcome variable, while the amount of stress is the predictor variable. </p>
+      <p>A linear model would attempt the following - </p>
+      <p>\[p(X) = \beta_{0} + \beta_{1}X\]</p>
+      <p>The problem is that any time a straight line is fit to a binary response that is coded as
+        0 or 1, in principle we can always predict p(X) < 0 for some values of X and p(X) > 1 for others. In the plot below, the red line is a linear model fit to a dichotomus outcome variable whereas, the blue line is a logistic function. So, the next question is what is a logistic function?</p>
+      <img src="plot3.jpeg" alt="">
+      <p>Previously we chose to model our probabilities using a linear representation, but since we want to bound our probabilities within 0 and 1, we can use a logistic function instead - </p>
+      <p>\[p(X) = \frac{e^{\beta_{0} + \beta_{1}X}}{1 + e^{\beta_{0} + \beta_{1}X}}\]</p>
+      <p>With a bit of shifting here and there, we end up with = </p>
+      <p>\[\frac{p(X)}{1+p(X)} = e^{\beta_{0} + \beta_{1}X}\]</p>
+      <p>The left hand side of the equation depicts the odds. If we take the log of both sides, we end up with a simplistic equation that suggests that the log of odds, has a linear relationship.</p>
+      <p>\[log(\frac{p(X)}{1+p(X)}) = \beta_{0} + \beta_{1}X\]</p>
+      <p><b>Hence why our link function for a logistic model is the log of odds.</b> Now since the ideas, are a little more solidified, we will breeze through the other link functions in a jiffy.</p>
+      <h2>Poisson Distribution</h2>
+      <p>The Poisson distribution is commonly used to model count data, such as the number of events occurring in a fixed interval of time or space. For example, the number of car accidents in a day or the number of customers visiting a store in a day.</p>
+      <p>Since the Poisson distribution is discrete, it is not appropriate to use a linear model to model count data. Instead, we can use a Poisson regression model, which uses a log link function and assumes that the response variable follows a Poisson distribution.</p>
+      <p>\[log(\mu) = \beta_{0} + \beta_{1}X\]</p>
+      <p>Here, \(\mu\) is the mean of the response variable, and X is the predictor variable.</p>
+      <h2>Gamma Distribution</h2>
+      <p>The gamma distribution is commonly used to model continuous, positive-valued data that is skewed to the right. For example, the amount of time until a customer makes a purchase or the amount of time until a machine breaks down.</p>
+      <p>Gamma regression is used for modeling positively skewed continuous data where the response variable follows a gamma distribution. The inverse link function ensures that the predicted values are positive.</p>
+      <p>\[\frac{1}{\mu} = \beta_{0} + \beta_{1}X\]</p>
+    </div>
+
+    <div class="steps">
+      <h2>GLM Link Functions</h2>
+    <table border="1">
+        <tr>
+            <th>Link Function</th>
+            <th>Equation</th>
+        </tr>
+        <tr>
+            <td><strong>Logit</strong></td>
+            <td>\( \log \left( \frac{p}{1-p} \right) \)</td>
+        </tr>
+        <tr>
+            <td><strong>Probit</strong></td>
+            <td>\( \Phi^{-1}(p) \)</td>
+        </tr>
+        <tr>
+            <td><strong>Cloglog</strong></td>
+            <td>\( \log(-\log(1-p)) \)</td>
+        </tr>
+        <tr>
+            <td><strong>Log</strong></td>
+            <td>\( \log(p) \)</td>
+        </tr>
+        <tr>
+            <td><strong>Identity</strong></td>
+            <td>\( p \)</td>
+        </tr>
+        <tr>
+            <td><strong>Log-Log</strong></td>
+            <td>\( \log(-\log(p)) \)</td>
+        </tr>
+        <tr>
+            <td><strong>Sqrt</strong></td>
+            <td>\( \sqrt{p} \)</td>
+        </tr>
+        <tr>
+            <td><strong>Inverse</strong></td>
+            <td>\( \frac{1}{p} \)</td>
+        </tr>
+        <tr>
+            <td><strong>Power</strong></td>
+            <td>\( p^{\lambda} \)</td>
+        </tr>
+    </table>
+    <p><em>Note: These are common link functions used in GLMs with their respective equations.</em></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+name: appy
+title: appy
+username: claustecter
+account: claustecter
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9901932
+bundleId: 7698788
+url: https://claustecter.shinyapps.io/appy/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: index.css|index.html|index.js
